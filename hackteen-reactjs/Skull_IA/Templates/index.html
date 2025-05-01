@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site test</title>
+</head>
+<body>
+    <h1>Digite sua frase:</h1>
+    <form method="post">
+        <textarea 
+            name="mensagem"
+            rows="5" 
+            cols="40"
+            placeholder="Digite uma mensagem" 
+            required
+            style="resize: none; width: 300px; height: 100px;"
+        >{{ mensagem }}</textarea>
+        <br>
+        <button type="submit">Mandar</button>
+    </form>
+
+    {% if respostaIA and respostaIA != mensagem %}
+        <form action="/corrigir" method="post">
+            <button type="submit">Sugestão: {{ respostaIA }}</button>
+        </form>
+    {% endif %}
+</body>
+</html>
