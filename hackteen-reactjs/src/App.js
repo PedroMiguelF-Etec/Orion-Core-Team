@@ -13,28 +13,41 @@ function App() {
     event.preventDefault();
     setLoading(true);
 
-    try {
-      // Faz a requisição para o backend Flask
-      const response = await fetch('http://127.0.0.1:5000/api/corrigir', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ mensagem }), // Envia a mensagem como JSON
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setRespostaIA(data.resposta); // Define a resposta retornada pelo Flask
-      } else {
-        setRespostaIA('Erro ao conectar com o servidor.');
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+      setLoading(true);
+    
+      try {
+        // Faz a requisição para o backend Flask
+        const response = await fetch('http://127.0.0.1:5000/api/corrigir', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ mensagem }), // Envia a mensagem como JSON
+        });
+    
+        // A segunda requisição também precisa de Content-Type
+        await fetch('http://127.0.0.1:5000/api/adicionar', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ mensagem }), // Envia a mensagem como JSON
+        });
+    
+        if (response.ok) {
+          const data = await response.json();
+          setRespostaIA(data.resposta); // Define a resposta retornada pelo Flask
+        } else {
+          setRespostaIA('Erro ao conectar com o servidor.');
+        }
+      } catch (error) {
+        setRespostaIA('Erro ao processar a solicitação.');
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      setRespostaIA('Erro ao processar a solicitação.');
-    } finally {
-      setLoading(false);
-    }
-  };
+    };
 
   const handleCorrigir = () => {
     setMensagem(respostaIA);
@@ -59,6 +72,7 @@ function App() {
         <button type="submit" disabled={loading}>
           {loading ? 'Processando...' : 'Mandar'}
         </button>
+        <div id="resultadoSimples" style="margin-top: 20px; font-weight: bold;"></div>
       </form>
 
       {respostaIA && respostaIA !== mensagem && (
@@ -70,6 +84,7 @@ function App() {
       )}
     </div>
   );
+}
 }
 
 export default App;

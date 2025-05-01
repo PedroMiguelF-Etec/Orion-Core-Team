@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Site test</title>
 </head>
-<body>
+<body style="text-align: center;">
     <h1>Digite sua frase:</h1>
-    <form method="post">
-        <textarea 
+    
+    <form id="formCorrigir">
+        <textarea
+            id="mensagem"
             name="mensagem"
             rows="5" 
             cols="40"
@@ -17,13 +19,88 @@
             style="resize: none; width: 300px; height: 100px;"
         >{{ mensagem }}</textarea>
         <br>
-        <button type="submit">Mandar</button>
+        <button type="submit">Corrigir</button>
     </form>
 
+    <form id="formAdicionar">
+        <button type="submit">Gerar uma palavra de sugestão</button>
+    </form>
+
+    <br>
     {% if respostaIA and respostaIA != mensagem %}
-        <form action="/corrigir" method="post">
-            <button type="submit">Sugestão: {{ respostaIA }}</button>
+        <button id="resultado" style="margin-top: 10px;">Correção: {{ respostaIA }}</button>
+    {% else %}
+        <button id="resultado" style="display: none; margin-top: 10px;">Correção:</button>
+    {% endif %}
+    {% if palavra %}
+        <form action="/adicionar"  method="POST">
+            <button type="submit" id="resultadoSugestão">Sugestão: {{ palavra }}</button>
         </form>
     {% endif %}
+        
+    </div>
+    
+    <script>
+        // Interceptar o envio do formulário para enviar dados via fetch como JSON
+        document.getElementById('formCorrigir').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Previne o envio padrão do formulário
+    
+            const mensagem = document.getElementById('mensagem').value;
+    
+            // Envia os dados para o endpoint '/api/corrigir'
+            try {
+                const response = await fetch('http://127.0.0.1:5000/api/corrigir', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ mensagem }),
+                });
+    
+                const botaoResultado = document.getElementById('resultado');
+    
+                if (response.ok) {
+                    const data = await response.json();
+                    botaoResultado.style.display = 'inline-block';
+                    botaoResultado.innerHTML = `Correção: ${data.resposta || 'Sem resposta'}`;
+                } else {
+                    const errorData = await response.json();
+                    botaoResultado.style.display = 'inline-block';
+                    botaoResultado.innerHTML = `Erro: ${errorData.error}`;
+                }
+            } catch (error) {
+                const botaoResultado = document.getElementById('resultado');
+                botaoResultado.style.display = 'inline-block';
+                botaoResultado.innerHTML = 'Erro ao enviar a solicitação.';
+            }
+        });
+    
+        // Interceptar o envio do segundo formulário
+        document.getElementById('formAdicionar').addEventListener('submit', async function(event) {
+            event.preventDefault();
+    
+            const mensagem = document.getElementById('mensagem').value;
+    
+            try {
+                const response = await fetch('http://127.0.0.1:5000/api/adicionar', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ mensagem }),
+                });
+    
+                if (response.ok) {
+                    const data = await response.json();
+                    document.getElementById('resultadoSugestão').innerHTML = `Sugestão: ${data.palavra || 'Sem sugestão'}`;
+                } else {
+                    const errorData = await response.json();
+                    document.getElementById('resultadoSugestão').innerHTML = `Erro: ${errorData.error}`;
+                }
+            } catch (error) {
+                document.getElementById('resultadoSugestão').innerHTML = 'Erro ao enviar a solicitação.';
+            }
+        });
+    </script>
 </body>
 </html>
