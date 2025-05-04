@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function App() {
   const [mensagem, setMensagem] = useState('');
@@ -8,9 +8,52 @@ function App() {
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
   const [user, setUser] = useState(null);
+  const [userNote, setUserNote] = useState(''); // Estado para a nota do usuário
+
+  useEffect(() => {
+    // Carrega a nota do usuário ao fazer login
+    if (isLoggedIn && user) {
+      loadUserNote(user.email); // Usa o email como ID do usuário
+    }
+  }, [isLoggedIn, user]);
+
+  const loadUserNote = async (userId) => {
+    try {
+      const response = await fetch(`/api/notes?userId=${userId}`);
+      if (response.ok) {
+        const data = await response.json();
+        setUserNote(data.note);
+        setMensagem(data.note); // Define a nota como a mensagem inicial
+      } else {
+        console.error('Failed to load user note');
+      }
+    } catch (error) {
+      console.error('Error loading user note:', error);
+    }
+  };
+
+  const saveUserNote = async (userId, note) => {
+    try {
+      const response = await fetch(`/api/notes?userId=${userId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ note }),
+      });
+      if (response.ok) {
+        console.log('User note saved successfully');
+      } else {
+        console.error('Failed to save user note');
+      }
+    } catch (error) {
+      console.error('Error saving user note:', error);
+    }
+  };
 
   const handleMensagemChange = (event) => {
     setMensagem(event.target.value);
+    setUserNote(event.target.value); // Atualiza a nota do usuário ao digitar
   };
 
   const handleSubmit = async (event) => {
@@ -58,6 +101,7 @@ function App() {
         setIsLoggedIn(true);
         setUser(data.user);
         setShowLogin(false);
+        loadUserNote(email); // Carrega a nota do usuário ao fazer login
       } else {
         alert('Login falhou. Verifique suas credenciais.');
       }
@@ -96,8 +140,13 @@ function App() {
   };
 
   const handleLogout = () => {
+    if (user) {
+      saveUserNote(user.email, userNote); // Salva a nota antes de fazer logout
+    }
     setIsLoggedIn(false);
     setUser(null);
+    setUserNote(''); // Limpa a nota ao fazer logout
+    setMensagem(''); // Limpa a mensagem ao fazer logout
   };
 
   return (
