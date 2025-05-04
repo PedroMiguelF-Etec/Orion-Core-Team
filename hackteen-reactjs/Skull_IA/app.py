@@ -121,3 +121,42 @@ def api_adicionar():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+@app.route('/api/login', methods=['POST'])
+def api_login():
+    if not request.is_json:
+        return jsonify({'error': 'Content-Type não é application/json'}), 415
+
+    data = request.get_json()
+    email = data.get('email')
+    password = data.get('password')
+
+    if not email or not password:
+        return jsonify({'error': 'Email e senha são obrigatórios'}), 400
+
+    # Simulação de autenticação (substitua por lógica de banco de dados)
+    if email == "teste@teste.com" and password == "123456":
+        user = {'name': 'Usuário Teste', 'email': email}
+        return jsonify({'message': 'Login bem-sucedido', 'user': user}), 200
+    else:
+        return jsonify({'error': 'Credenciais inválidas'}), 401
+
+
+@app.route('/api/register', methods=['POST'])
+def api_register():
+    if not request.is_json:
+        return jsonify({'error': 'Content-Type não é application/json'}), 415
+
+    data = request.get_json()
+    name = data.get('name')
+    email = data.get('email')
+    password = data.get('password')
+
+    if not name or not email or not password:
+        return jsonify({'error': 'Nome, email e senha são obrigatórios'}), 400
+
+    # Simulação de registro (substitua por lógica de banco de dados)
+    if email == "teste@teste.com":
+        return jsonify({'error': 'Usuário já registrado'}), 409
+
+    return jsonify({'message': 'Cadastro realizado com sucesso!'}), 201
