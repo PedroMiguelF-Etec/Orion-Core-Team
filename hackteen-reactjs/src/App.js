@@ -61,7 +61,7 @@ function App() {
     setLoading(true);
 
     try {
-      const response = await fetch('/api/corrigir', {
+      const response = await fetch('/api/corrigir.js', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
