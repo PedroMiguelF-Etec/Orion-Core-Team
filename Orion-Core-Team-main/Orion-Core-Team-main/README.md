@@ -5,23 +5,23 @@
 
 ###
 
-<h1 align="center">orion core</h1>
+<h1 align="center">Orion Core</h1>
 
 ###
 
-<h2 align="center">skull AI oque você precisa a skul pode te ajudar</h2>
+<h2 align="center">Skull AI oque você precisa a skul pode te ajudar</h2>
 
 ###
 
-<h3 align="left">sobre a empresa</h3>
+<h3 align="left">Sobre a Empresa</h3>
 
 ###
 
-<p align="left">startup brasileira <br>projeto de chat de anotação com auxilio integrado de ia chamado skull AI<br>para facilitar a organização sendo assim o seu bloco de notas</p>
+<p align="left">Startup brasileira <br>Projeto de chat de anotação com auxilio integrado de ia chamado skull AI<br>Para facilitar a organização sendo assim o seu bloco de notas</p>
 
 ###
 
-<h3 align="left">linguagens e  tools</h3>
+<h3 align="left">Linguagens e Ferramentas</h3>
 
 ###
 
