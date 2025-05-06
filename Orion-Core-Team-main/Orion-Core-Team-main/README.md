@@ -5,23 +5,23 @@
 
 ###
 
-<h1 align="center">Orion Core</h1>
+<h1 align="center">orion core</h1>
 
 ###
 
-<h2 align="center">Skull AI oque você precisa a skul pode te ajudar</h2>
+<h2 align="center">skull AI oque você precisa a skul pode te ajudar</h2>
 
 ###
 
-<h3 align="left">Sobre a Empresa</h3>
+<h3 align="left">sobre a empresa</h3>
 
 ###
 
-<p align="left">Startup brasileira <br>Projeto de chat de anotação com auxilio integrado de ia chamado skull AI<br>Para facilitar a organização sendo assim o seu bloco de notas</p>
+<p align="left">startup brasileira <br>projeto de chat de anotação com auxilio integrado de ia chamado skull AI<br>para facilitar a organização sendo assim o seu bloco de notas</p>
 
 ###
 
-<h3 align="left">Linguagens e Ferramentas</h3>
+<h3 align="left">linguagens e  tools</h3>
 
 ###
 
@@ -39,10 +39,14 @@
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" height="40" alt="react logo"  />
   <img width="12" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" height="40" alt="python logo"  />
+  <img width="12" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" height="40" alt="firebase logo"  />
 </div>
 
+###
+
 <div align="center">
-<img height="200" src="https://media.discordapp.net/attachments/1366540505747554324/1369087882643378239/slogan.png?ex=681a95f3&is=68194473&hm=1b0d29e1b5fee594be1148aa4e79eaa3369964eab2ceb1baf0ea695f72e6ace2&=&format=webp&quality=lossless"  />
+  <img height="200" src="https://media.discordapp.net/attachments/1366540505747554324/1369087882643378239/slogan.png?ex=681a95f3&is=68194473&hm=1b0d29e1b5fee594be1148aa4e79eaa3369964eab2ceb1baf0ea695f72e6ace2&=&format=webp&quality=lossless"  />
 </div>
 
 ###
