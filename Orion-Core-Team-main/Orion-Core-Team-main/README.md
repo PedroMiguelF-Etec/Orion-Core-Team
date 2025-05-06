@@ -41,4 +41,6 @@
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" height="40" alt="python logo"  />
 </div>
 
+<img height="300" src="https://media.discordapp.net/attachments/1366540505747554324/1369087882643378239/slogan.png?ex=681a95f3&is=68194473&hm=1b0d29e1b5fee594be1148aa4e79eaa3369964eab2ceb1baf0ea695f72e6ace2&=&format=webp&quality=lossless"/>
+
 ###
