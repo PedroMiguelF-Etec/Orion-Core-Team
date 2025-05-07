@@ -153,7 +153,7 @@ function App() {
     <div style={styles.container}>
       {/* Barra superior */}
       <div style={styles.navbar}>
-        <img src="logo.png" alt="Logo" style={styles.logo} />
+        <img src="slogan2.png" alt="" style={styles.logo} />
         <div style={styles.navButtons}>
           {isLoggedIn ? (
             <>
